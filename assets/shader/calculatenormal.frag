@@ -14,7 +14,7 @@ void main() {
   //       vertex pos
   // 
   //         vertex1       
-  // vertex2         vertex4
+  // vertex2   ori   vertex4
   //         vertex3
   // 
 
@@ -22,10 +22,14 @@ void main() {
   float h2 = sin(offset - 0.1 * (fragment_pos.y)) ;
   float h3 = sin(offset - 0.1 * (fragment_pos.y+delta)) ;
   float h4 = sin(offset - 0.1 * (fragment_pos.y)) ;
-  vec3 v1 = vec3(2.0*delta, 0.0, h4-h2) ;
-  vec3 v2 = vec3(delta, -delta, h1-h2) ;
-  vec3 v3 = vec3(delta, delta, h3-h2) ;
-  vec3 v4 = v1 ;
+  float h_ori = sin(offset - 0.1 * (fragment_pos.y)) ;
+  vec3 v1 = vec3(delta, delta, h4-h1) ;
+  vec3 v2 = vec3(-delta, delta, h2-h1) ;
+  vec3 v3 = vec3(-delta, -delta, h2-h3) ;
+  vec3 v4 = vec3(delta, -delta, h4-h3) ;
+  vec3 v5 = vec3(0, delta, h_ori-h1) ;
+  vec3 v6 = vec3(0, -delta, h_ori-h3) ;
+  vec3 middle = vec3(0, 2*delta, h3-h1) ;
 
   vec3 average = normalize(cross(v1,v2) + cross(v3,v4)) ;
 
@@ -39,7 +43,8 @@ void main() {
   //   1. Height at (x, y) = H(x, y) = sin(offset - 0.1 * y)
   //   2. A simple tranform from [-1, 1] to [0, 1] is f(x) = x * 0.5 + 0.5
   //   3. For sample points, z = H(x +- delta, y +- delta)
-  average = average*0.5 + 0.5 ;
-  normal = vec4(average, 1) ;
+
+  vec3 rgb_average = average*0.5 + 0.5 ;
+  normal = vec4(rgb_average, 1) ;
   height = sin(offset-0.1*fragment_pos.y);
 }

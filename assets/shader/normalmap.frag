@@ -56,13 +56,11 @@ void main() {
   //   6. diffuse = kd * max(normal vector dot light direction, 0.0)
 
   // diffuse
-  vec3 norm = normalize(normal);
-  diffuse = 0.75 * max(dot(norm, fs_in.lightDirection), 0.0);
+  diffuse = 0.75 * max(dot(fs_in.lightDirection, normal), 0.0);
 
   // specular
-  vec3 viewDir = normalize(fs_in.viewPosition - fs_in .position);
-  vec3 halfwayDir = normalize(fs_in.lightDirection + viewDir);    
-  specular = 0.75 * pow(max(dot(norm, halfwayDir), 0.0), 8.0);
+  vec3 halfwayDir = normalize(fs_in.lightDirection + viewDirectionection);    
+  specular = 0.75 * pow(max(dot(normal, halfwayDir), 0.0), 8.0);
   
   float lighting = ambient + diffuse + specular;
   FragColor = vec4(lighting * diffuseColor, 1.0);
