@@ -209,9 +209,9 @@ int main() {
     if (isCameraMove || isWindowSizeChanged) {
       isWindowSizeChanged = false;
       shaderPrograms[0].use();
-      shaderPrograms[0].setUniformMatrix("view", 
-          glm::value_ptr(glm::mat4(glm::mat3(currentCamera->getViewMatrix()))));
-      // shaderPrograms[0].setUniformMatrix("view", currentCamera->getViewMatrixPTR());
+      //shaderPrograms[0].setUniformMatrix("view", 
+      //    glm::value_ptr(glm::mat4(glm::mat3(currentCamera->getViewMatrix()))));
+      shaderPrograms[0].setUniformMatrix("view", currentCamera->getViewMatrixPTR());
       shaderPrograms[0].setUniformMatrix("projection", currentCamera->getProjectionMatrixPTR());
 
       cameraUBO.load(0, sizeof(glm::mat4), currentCamera->getViewProjectionMatrixPTR());

@@ -8,8 +8,8 @@ uniform mat4 projection;
 
 void main() {
   textureCoordinate = position_in;
-  // mat4 new_view =  mat4(mat3(view)) ;
-  vec4 pos = projection * view * vec4(position_in, 1.0) ; 
+  mat4 new_view =  mat4(mat3(view)) ;
+  vec4 pos = projection * new_view * vec4(position_in, 1.0) ; 
   gl_Position = pos.xyww ;
 
   // TODO1: Set gl_Position

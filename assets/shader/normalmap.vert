@@ -40,18 +40,16 @@ void main() {
   //   3. (Bonus-Displacement) Query height from heightTexture.
 
   // first way
-  // vec3 T = normalize(vec3(modelMatrix * vec4(tangent_in,   0.0)));
-  // vec3 B = normalize(vec3(modelMatrix * vec4(bitangent_in, 0.0)));
-  // vec3 N = normalize(vec3(modelMatrix * vec4(normal_in,    0.0)));
-  // mat3 TBN = transpose(mat3(T, B, N)) ;
+  vec3 T = normalize(vec3(normalMatrix * vec4(tangent_in,   0.0)));
+  vec3 B = normalize(vec3(normalMatrix * vec4(bitangent_in, 0.0)));
+  vec3 N = normalize(vec3(normalMatrix * vec4(normal_in,    0.0)));
+  mat3 TBN = transpose(mat3(T, B, N)) ;
 
   // another way
-  mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
-  vec3 T = normalize(normalMatrix * tangent_in);
-  vec3 B = normalize(normalMatrix * bitangent_in);
-  vec3 N = normalize(normalMatrix * normal_in);    
-    
-  mat3 TBN = transpose(mat3(T, B, N)); 
+  // vec3 T = normalize(mat3(normalMatrix) * tangent_in);
+  // vec3 B = normalize(mat3(normalMatrix) * bitangent_in);
+  // vec3 N = normalize(mat3(normalMatrix) * normal_in);    
+  // mat3 TBN = transpose(mat3(T, B, N)); 
 
   vs_out.lightDirection = TBN * lightDirection ;
   vs_out.viewPosition = TBN * vec3(viewPosition);
