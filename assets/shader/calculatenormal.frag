@@ -31,7 +31,7 @@ void main() {
   vec3 v6 = vec3(0, -delta, h_ori-h3) ;
   vec3 middle = vec3(0, 2*delta, h3-h1) ;
 
-  vec3 average = normalize(cross(v2,v1) + cross(v4,v3)) ;
+  vec3 average = normalize(cross(v1,v2) + cross(v3,v4)) ;
 
   // TODO3: Generate the normal map.
   //   1. Get the position of the fragment. (screen space)

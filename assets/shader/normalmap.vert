@@ -33,7 +33,7 @@ layout (std140) uniform camera {
 
 void main() {
   // Direction of light, hard coded here for convinience.
-  const vec3 lightDirection = normalize(vec3(-11.1, -24.9, 14.8));
+  const vec3 lightDirection = normalize(vec3(11.1, 24.9, -14.8));
   // TODO4:
   //   1. Calculate the inverse of tangent space transform matrix (TBN matrix)
   //   2. Transform light direction, viewPosition, and position to the tangent space.
